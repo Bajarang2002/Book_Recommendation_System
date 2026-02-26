@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar custom-navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand brand-title">BookAI Recommender</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container text-center">
+    <h1 class="page-title">Find Your Next Favorite Book</h1>
+
+    <div class="search-box">
+        <form action="/recommend_books" method="post">
+            <input name="user_input" type="text" 
+                   class="form-control search-input"
+                   placeholder="Enter a book title...">
+            <br>
+            <input type="submit" value="Get Recommendations" 
+                   class="btn btn-primary btn-lg custom-btn">
+        </form>
+    </div>
+
+    <div class="row">
+        {% if data %}
+            {% for i in data %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="book-card">
+                    <img src="{{ i[2] }}" class="img-responsive center-block">
+                    <h4 class="book-title">{{ i[0] }}</h4>
+                    <p class="book-author">{{ i[1] }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<footer class="footer">
+    © 2026 BookAI Recommendation System
+</footer>
+
+</body>
+</html>
